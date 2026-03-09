@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Developer | Резюме</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Базовая палитра, более "живая" за счет градиента на фоне */
+            --bg-start: #eef2f5;
+            --bg-end: #e0e8ed;
+            --text: #2d3436;
+            --accent: #2d3e50; /* Темно-синий для серьезности */
+            --accent-glow: rgba(45, 62, 80, 0.15); /* Цвет для теней при наведении */
+            --secondary: #636e72;
+            --white: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --card-hover-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            --transition-speed: 0.3s; /* Скорость всех анимаций */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ЭФФЕКТ 1: Живой анимированный градиент на фоне всего сайта */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #f8f9fa, #eef2f5, #e0e8ed, #f1f3f5);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            /* Легкая прозрачность контейнера, чтобы фон немного просвечивал */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            backdrop-filter: blur(5px); /* Размытие фона за контейнером */
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            border-bottom: 2px solid #f1f3f5;
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        h1 { font-size: 2.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .subtitle { font-size: 1.3rem; color: var(--secondary); font-weight: 300; }
+
+        /* ЭФФЕКТ 2: Появление контента при загрузке (Slide In) */
+        section { 
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
+        
+        /* Задержка появления для разных секций */
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { 
+            font-size: 1.3rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            margin-bottom: 1.5rem; 
+            color: var(--accent); 
+            display: inline-block;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        /* Живое подчеркивание заголовков */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: width var(--transition-speed) ease;
+        }
+        
+        /* ЭФФЕКТ 3: Удлинение подчеркивания при наведении на секцию */
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        p { margin-bottom: 1rem; text-align: justify; color: #4a4a4a; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ЭФФЕКТ 4: Карточки с тенями и всплыванием при наведении */
+        .skill-category {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f3f5;
+            /* Плавность трансформации и тени */
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px); /* Всплывание */
+            box-shadow: var(--card-hover-shadow); /* Глубокая тень */
+            border-color: rgba(45, 62, 80, 0.1); /* Легкое изменение цвета границы */
+        }
+
+        .skill-category h3 { font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--accent); font-weight: 600; }
+        .skill-list { list-style: none; color: var(--secondary); font-size: 0.95rem; }
+        .skill-list li { margin-bottom: 0.4rem; display: flex; align-items: center; }
+        
+        /* Живые маркеры списка */
+        .skill-list li::before { 
+            content: "→"; 
+            color: var(--accent); 
+            margin-right: 8px; 
+            font-weight: bold;
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .skill-category:hover .skill-list li::before {
+            transform: translateX(3px); /* Стрелочки сдвигаются при наведении на карточку */
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+            transition: background var(--transition-speed) ease;
+        }
+        
+        .highlight-box:hover {
+            background: #f1f3f5; /* Чуть темнее фон при наведении */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #f1f3f5;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        .contacts a { 
+            color: var(--accent); 
+            text-decoration: none; 
+            font-weight: 600; 
+            margin: 0 10px;
+            display: inline-block;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+
+        /* ЭФФЕКТ 5: Анимированное подчеркивание ссылок */
+        .contacts a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transform-origin: bottom right;
+            transition: transform var(--transition-speed) ease-out;
+        }
+
+        .contacts a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem; border-radius: 0; margin: -2rem -1rem; }
+            h1 { font-size: 2rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Твоё Имя Фамилия</h1>
+        <div class="subtitle">ASP.NET / React Developer</div>
+    </header>
+
+    <section id="about">
+        <h2>О себе</h2>
+        <p>
+            Разработчик с опытом создания прикладных информационных систем и работы со сложными предметными областями. 
+            Специализируюсь на построении архитектуры, создании отказоустойчивых API и интеграции современных фронтенд-решений. 
+            Придерживаюсь философии чистого кода и долгосрочной поддерживаемости систем.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>Технологический стек</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <ul class="skill-list">
+                    <li>C#, .NET, ASP.NET Core</li>
+                    <li>EF Core, REST API</li>
+                    <li>Unit Testing (xUnit)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <ul class="skill-list">
+                    <li>React, TypeScript</li>
+                    <li>Angular, HTML5/CSS3</li>
+                    <li>State Management</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Инструменты</h3>
+                <ul class="skill-list">
+                    <li>WPF (Desktop)</li>
+                    <li>PostgreSQL / SQL</li>
+                    <li>Git, Docker</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Опыт и экспертиза</h2>
+        <div class="highlight-box">
+            <strong>Инженерное ПО и промышленный сектор:</strong> Разработка систем управления рентгеновскими установками на WPF. 
+            Опыт работы с низкоуровневой логикой, аппаратной частью и сложными бизнес-требованиями.
+        </div>
+        <p>
+            Параллельно развиваюсь в современной веб-архитектуре. Проектирую backend-сервисы, используя принципы 
+            <strong>Clean Architecture</strong> и слоистые подходы. Реализую полный цикл: от проектирования базы данных 
+            до создания отзывчивого интерфейса на React.
+        </p>
+    </section>
+
+    <section id="philosophy">
+        <h2>Подход к работе</h2>
+        <p>
+            Мне нравится погружаться в новые предметные области и переводить сложные инженерные требования на язык надежного программного кода. 
+            В разработке ценю баланс между функциональностью и лаконичностью решений.
+        </p>
+    </section>
+
+    <footer>
+        <p class="contacts">Связь со мной: 
+            <a href="mailto:your-email@example.com">Email</a> | 
+            <a href="https://github.com/your-username" target="_blank">GitHub</a> | 
+            <a href="#">Telegram</a>
+        </p>
+        <p style="margin-top: 1.5rem; opacity: 0.6; font-size: 0.8rem;">&copy; 2026 | Создано с фокусом на качество и поддерживаемость</p>
+    </footer>
+</div>
+
+</body>
+</html>
